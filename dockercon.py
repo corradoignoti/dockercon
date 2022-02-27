@@ -4,6 +4,7 @@ import sys
 import os
 
 def create_context(cont_name, cont_stack, cont_host) -> bool:
+    """Create a new docker context"""
     cmd_ret_code = 0
     try:
         cmd_ret_code = os.system(f"docker context create {cont_name} --default-stack-orchestrator={cont_stack} --docker host={cont_host}")
@@ -16,6 +17,7 @@ def create_context(cont_name, cont_stack, cont_host) -> bool:
             return False
 
 def delete_context(cont_name):
+    """Delete a docker context"""
     cmd_ret_code = 0
     try:
         cmd_ret_code = os.system(f"docker context rm {cont_name}")
@@ -28,6 +30,7 @@ def delete_context(cont_name):
             return False
 
 def set_context(context_name) -> bool:
+    """Set the current docker context"""
     cmd_ret_code = 0
     try:
         cmd_ret_code = os.system(f"docker context use {context_name}")
@@ -40,6 +43,7 @@ def set_context(context_name) -> bool:
             return False
 
 def list_context():
+    """List all docker context"""
     cmd_ret_code = 0
     try:
         cmd_ret_code = os.system("docker context ls")
@@ -54,6 +58,7 @@ def list_context():
 #
 # main
 #
+
 # Parse command line
 parser = parser = argparse.ArgumentParser(description=" dockercon is a tool to switch between docker contexts faster.")
 parser.add_argument("name", type=str, help="Switch to context '<NAME>'", nargs="?", default=None, metavar='<NAME>')
